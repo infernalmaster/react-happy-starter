@@ -43,23 +43,53 @@
 /* eslint-disable no-var */
 var webpack = require('webpack');
 var path = require('path');
+var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
-  entry: [
-    'webpack-dev-server/client?http://localhost:5000',
-    'webpack/hot/dev-server',
-    './scripts/index'
-  ],
+  root: path.resolve('./scripts'),
+  entry: {
+    app: './scripts/index',
+    vendor: [
+      'webpack-dev-server/client?http://localhost:5000',
+      'webpack/hot/dev-server',
+      'react',
+      'react-dom'
+    ]
+  },
   output: {
     path: __dirname,
     filename: 'bundle.js',
     publicPath: '/static/'
   },
   resolve: {
+    modulesDirectories: ['node_modules'],
+    root: [path.resolve('./scripts')],
     extensions: ['', '.js']
   },
-  devtool: 'eval-source-map',
+  devtool: 'eval',
+  // devtool: 'cheap-source-map',
+  // this sourcemap is good but need wait to upd issue https://github.com/webpack/webpack/issues/91
+  // devtool: 'eval-source-map',
   plugins: [
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js'),
+    new BrowserSyncPlugin(
+      // BrowserSync options
+      {
+        // browse to http://localhost:3000/ during development
+        host: 'localhost',
+        port: 3000,
+        // proxy the Webpack Dev Server endpoint
+        // (which should be serving on http://localhost:3100/)
+        // through BrowserSync
+        proxy: 'http://localhost:5000/'
+      },
+      // plugin options
+      {
+        // prevent BrowserSync from reloading the page
+        // and let Webpack Dev Server take care of this
+        reload: false
+      }
+    ),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ],
@@ -68,6 +98,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loaders: ['babel'],
+        // exclude: path.join(__dirname, 'node_modules')
         include: path.join(__dirname, 'scripts')
       }
     ]

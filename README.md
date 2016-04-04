@@ -6,6 +6,8 @@ Boilerplate for kick starting a project with the following technologies:
 * [Webpack](http://webpack.github.io) for bundling
 * [Webpack Dev Server](http://webpack.github.io/docs/webpack-dev-server.html)
 * [React Transform](https://github.com/gaearon/react-transform-hmr) for hot reloading React components in real time.
+* [BrowserSync](https://www.browsersync.io/)
+* [Flow](http://flowtype.org/)
 
 The various webpack options used have been explained in detailed as comments in the config file. Should help with understanding the nitty-gritty :)
 
@@ -24,5 +26,11 @@ ESLint with React linting options have been enabled.
 
 ```
 npm run lint
+```
+
+Styles lint
+
+```
+npm run stylelint
 ```
 
