@@ -46,24 +46,25 @@ var path = require('path');
 var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
-  root: path.resolve('./scripts'),
   entry: {
-    app: './scripts/index',
+    app: './src/index',
     vendor: [
-      'webpack-dev-server/client?http://localhost:5000',
-      'webpack/hot/dev-server',
+      // necessary for hot reloading with IE:
+      'eventsource-polyfill',
+      // listen to code updates emitted by hot middleware:
+      'webpack-hot-middleware/client',
       'react',
       'react-dom'
     ]
   },
   output: {
-    path: __dirname,
+    path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/static/'
+    publicPath: '/dist/'
   },
   resolve: {
+    root: [path.resolve('./src')],
     modulesDirectories: ['node_modules'],
-    root: [path.resolve('./scripts')],
     extensions: ['', '.js']
   },
   devtool: 'eval',
@@ -71,6 +72,10 @@ module.exports = {
   // this sourcemap is good but need wait to upd issue https://github.com/webpack/webpack/issues/91
   // devtool: 'eval-source-map',
   plugins: [
+    // Webpack 1.0
+    new webpack.optimize.OccurenceOrderPlugin(),
+    // Webpack 2.0 fixed this mispelling
+    // new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js'),
     new BrowserSyncPlugin(
       // BrowserSync options
@@ -96,10 +101,10 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
+        test: /\.js$/,
         loaders: ['babel'],
         // exclude: path.join(__dirname, 'node_modules')
-        include: path.join(__dirname, 'scripts')
+        include: path.join(__dirname, 'src')
       }
     ]
   }

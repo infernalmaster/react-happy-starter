@@ -43,18 +43,31 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-  entry: './scripts/index',
+  entry: {
+    app: './src/index',
+    vendor: [
+      // necessary for hot reloading with IE:
+      'eventsource-polyfill',
+      // listen to code updates emitted by hot middleware:
+      'webpack-hot-middleware/client',
+      'react',
+      'react-dom'
+    ]
+  },
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/'
+    publicPath: '/dist/'
   },
   resolve: {
+    root: [path.resolve('./src')],
+    modulesDirectories: ['node_modules'],
     extensions: ['', '.js']
   },
   devtool: 'source-map',
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js'),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
@@ -78,9 +91,9 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
+        test: /\.js$/,
         loaders: ['babel'],
-        include: path.join(__dirname, 'scripts')
+        include: path.join(__dirname, 'src')
       }
     ]
   }

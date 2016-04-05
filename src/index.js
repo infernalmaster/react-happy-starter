@@ -22,7 +22,9 @@ class Xxx {
     this.y = this.y.bind(this);
   }
 
-  y() {}
+  y() {
+    console.log('hello from y')
+  }
 }
 
 var a = new Xxx();
