@@ -63,7 +63,7 @@ module.exports = {
     publicPath: '/dist/'
   },
   resolve: {
-    root: [path.resolve('./src')],
+    root: [path.resolve('./src')], // TODO try this:  path.join(__dirname, 'src')
     modulesDirectories: ['node_modules'],
     extensions: ['', '.js']
   },
