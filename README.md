@@ -8,8 +8,14 @@ Boilerplate for kick starting a project with the following technologies:
 * [React Transform](https://github.com/gaearon/react-transform-hmr) for hot reloading React components in real time.
 * [BrowserSync](https://www.browsersync.io/)
 * [Flow like typecheck](https://github.com/codemix/babel-plugin-typecheck) for static and runtime type checking using flow type annotations.
-
-The various webpack options used have been explained in detailed as comments in the config file. Should help with understanding the nitty-gritty :)
+* [PostCSS](http://postcss.org/) with:
+    - postcss-import
+    - precss
+    - colorguard
+    - doiuse
+    - autoprefixer
+    - cssnano
+* [ImageMin](https://github.com/imagemin/imagemin) for PNG, JPEG, GIF and SVG images minification
 
 
 ### Usage

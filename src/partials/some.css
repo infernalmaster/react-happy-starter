@@ -1,0 +1,18 @@
+$test: 1;
+
+body {
+  background-color: green;
+}
+
+div {
+  background: #ff0000;
+}
+
+div.xxx {
+  background: #ff0001;
+  box-sizing: border-box;
+  background-image: url("partials/c.png");
+  width: 300px;
+  height: 300px;
+}
+

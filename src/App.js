@@ -22,8 +22,9 @@ export default class App extends Component {
       <div>
         <h1>edit me</h1>
         <button onClick={this.handleClick}>{`click me ${this.state.number}`}</button>
+        <div className='xxx'></div>
+        <img src={require("partials/c.png")} />
       </div>
-
     );
   }
 }

@@ -29,3 +29,5 @@ class Xxx {
 
 var a = new Xxx();
 a.y();
+
+var css = require('./index.css');
