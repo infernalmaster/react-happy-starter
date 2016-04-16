@@ -10,8 +10,17 @@
     "start": "node server.js",
     "prebuild": "npm run clean",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
+    "test": "cross-env NODE_ENV=test ava src/**/*.test.js",
+    "test:watch": "cross-env NODE_ENV=test ava --watch --require babel-register src/**/*.test.js",
     "lint": "./node_modules/.bin/eslint src; exit 0",
     "stylelint": "stylelint 'src/**/*.scss' --syntax scss"
+  },
+  "ava": {
+    "failFast": true,
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
   },
   "repository": {
     "type": "git",
@@ -30,14 +39,15 @@
   },
   "homepage": "https://github.com/vasanthk/react-es6-webpack-boilerplate",
   "dependencies": {
-    "react": "^0.14.5",
-    "react-dom": "^0.14.5",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
     "babel-runtime": "^6.3.19"
   },
   "devDependencies": {
-    "@kadira/storybook": "^1.11.0",
+    "@kadira/storybook": "^1.12.0",
     "autoprefixer": "^6.3.6",
-    "babel-core": "^6.7.4",
+    "ava": "^0.14.0",
+    "babel-core": "6.7.6",
     "babel-eslint": "6.0.2",
     "babel-loader": "^6.2.0",
     "babel-plugin-react-transform": "^2.0.2",
@@ -57,9 +67,9 @@
     "cssnano": "^3.5.2",
     "doiuse": "^2.3.0",
     "enzyme": "^2.2.0",
-    "eslint": "^2.6.0",
-    "eslint-plugin-babel": "^3.1.0",
-    "eslint-plugin-react": "^4.2.3",
+    "eslint": "2.8.0",
+    "eslint-plugin-babel": "3.2.0",
+    "eslint-plugin-react": "4.3.0",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.13.4",
     "file-loader": "^0.8.5",
@@ -68,13 +78,14 @@
     "postcss-import": "^8.1.0",
     "postcss-loader": "^0.8.2",
     "precss": "^1.4.0",
+    "react-addons-test-utils": "^15.0.1",
+    "react-dom": "^0.14.8",
     "react-transform-catch-errors": "^1.0.2",
     "react-transform-hmr": "^1.0.1",
-    "redbox-react": "^1.2.2",
+    "redbox-react": "^1.2.3",
     "rimraf": "^2.5.2",
     "style-loader": "^0.13.1",
-    "stylelint": "^5.2.1",
-    "tape": "^4.5.1",
+    "stylelint": "5.4.0",
     "url-loader": "^0.5.7",
     "webpack": "1.13.0",
     "webpack-dev-middleware": "^1.6.1",
