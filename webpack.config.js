@@ -91,6 +91,9 @@ module.exports = {
     // Webpack 2.0 fixed this mispelling
     // new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js'),
+    new webpack.DefinePlugin({
+      'process.env': { NODE_ENV: JSON.stringify(DEBUG ? 'development' : 'production') }
+    }),
     ...(DEBUG
       ? [
           new BrowserSyncPlugin(
@@ -143,9 +146,8 @@ module.exports = {
       {
           test: /\.(jpe?g|png|gif|svg)$/i,
           loaders: [
-          // url-loader
-              'url-loader?limit=1000&hash=sha512&digest=hex&name=' + (DEBUG ? '[path][name].[ext]?[hash]' : '[hash].[ext]'),
-              'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+            'url-loader?limit=1000&hash=sha512&digest=hex&name=' + (DEBUG ? '[path][name].[ext]?[hash]' : '[hash].[ext]'),
+            'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
           ]
       },
       {
@@ -159,7 +161,11 @@ module.exports = {
         test:   /\.css$/,
         loaders: [
           "style-loader",
-          "css-loader?sourceMap=true",
+
+          // ?sourceMap=true // FIX sourceMap prevent background-images from loading in Chrome
+          // this should fix https://github.com/webpack/style-loader/pull/96
+          "css-loader",
+
           "postcss-loader"
         ],
         include: path.join(__dirname, 'src')
