@@ -1,7 +1,7 @@
 /*@flow- */
 
-
 import React, {Component} from 'react';
+import hello from './x';
 
 export default class App extends Component {
 
@@ -12,6 +12,7 @@ export default class App extends Component {
   }
 
   handleClick() {
+    hello()
     this.setState({
       number: this.state.number + 1
     });
@@ -23,7 +24,7 @@ export default class App extends Component {
         <h1>edit me</h1>
         <button onClick={this.handleClick}>{`click me ${this.state.number}`}</button>
         <div className='xxx'></div>
-        <img src={require("partials/c.png")} />
+        <img src={require("./c.png")} />
       </div>
     );
   }
