@@ -37,7 +37,8 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/dist/'
+    // fix for broken background images https://github.com/webpack/style-loader/issues/55
+    publicPath: DEBUG ? 'http://localhost:3000/dist' : '/dist/'
   },
   resolve: {
     root: path.join(__dirname, 'src'),
@@ -128,9 +129,9 @@ module.exports = {
         loaders: [
           "style-loader",
 
-          // ?sourceMap=true // FIX sourceMap prevent background-images from loading in Chrome
+          // ?sourceMap=true // FIX: with sourceMap CSS is added as Blob with broken path to background images
           // this should fix https://github.com/webpack/style-loader/pull/96
-          "css-loader",
+          "css-loader?sourceMap=true",
 
           "postcss-loader"
         ]
