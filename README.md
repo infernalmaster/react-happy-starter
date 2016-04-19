@@ -23,7 +23,16 @@ Boilerplate for kick starting a project with the following technologies:
 ```
 npm install
 npm start
-Open http://localhost:5000
+```
+
+### Tests
+
+```
+npm test
+```
+
+```
+npm run test:watch
 ```
 
 ### Linting
@@ -40,8 +49,7 @@ Styles lint
 npm run stylelint
 ```
 
-TODO:
-  1. fix: wrong path for background images when using source maps
-  2. fix: path for assets without 'src' there:  /dist/src/partials/c.png?8d852b551c92095699e726fc06a02dea
-  3. https://github.com/airbnb/enzyme + https://github.com/substack/tape
-  4. https://facebook.github.io/immutable-js/
+### Build
+
+```
+npm run build
