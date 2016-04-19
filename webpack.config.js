@@ -18,7 +18,13 @@ const AUTOPREFIXER_BROWSERS = [
 
 module.exports = {
   entry: {
-    app: './src/index',
+    app: [
+      // necessary for hot reloading with IE:
+      'eventsource-polyfill',
+      // listen to code updates emitted by hot middleware:
+      'webpack-hot-middleware/client',
+      './src/index'
+    ],
     vendor: [
       // necessary for hot reloading with IE:
       'eventsource-polyfill',
@@ -97,9 +103,11 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        loaders: ['babel'],
-        // exclude: path.join(__dirname, 'node_modules')
-        include: path.join(__dirname, 'src')
+        loader: 'babel',
+        query: {
+          cacheDirectory: DEBUG
+        },
+        exclude: /(node_modules|bower_components)/
       },
       {
           test: /\.(jpe?g|png|gif|svg)$/i,
@@ -125,8 +133,7 @@ module.exports = {
           "css-loader",
 
           "postcss-loader"
-        ],
-        include: path.join(__dirname, 'src')
+        ]
       }
     ]
   },
