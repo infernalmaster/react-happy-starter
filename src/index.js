@@ -1,8 +1,11 @@
-/* @flow */
-
 import React from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
 import App from './partials/App';
+import Animal from './test-ts.ts';
+
+if (module.hot) {
+  module.hot.accept();
+}
 
 render(
   <App />,
@@ -23,7 +26,7 @@ class Xxx {
   }
 
   y() {
-    console.log('hello from y')
+    console.log('hello from y');
   }
 }
 

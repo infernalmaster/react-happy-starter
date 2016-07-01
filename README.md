@@ -15,6 +15,8 @@ Boilerplate for kick starting a project with the following technologies:
     - doiuse
     - autoprefixer
     - cssnano
+    - [rucksack](http://simplaio.github.io/rucksack): responsiveType, shorthandPosition, quantityQueries, alias, inputPseudo clearFix, fontPath, hexRGBA, easings
+
 * [ImageMin](https://github.com/imagemin/imagemin) for PNG, JPEG, GIF and SVG images minification
 
 

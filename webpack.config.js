@@ -43,7 +43,7 @@ module.exports = {
   resolve: {
     root: path.join(__dirname, 'src'),
     modulesDirectories: ['node_modules'],
-    extensions: ['', '.js']
+    extensions: ['', '.js', '.ts']
   },
   devtool: DEBUG ? 'eval' : 'source-map',
   // devtool: 'cheap-module-eval-source-map',
@@ -111,6 +111,10 @@ module.exports = {
         exclude: /(node_modules|bower_components)/
       },
       {
+        test: /\.ts$/,
+        loader: "ts-loader"
+      },
+      {
           test: /\.(jpe?g|png|gif|svg)$/i,
           loaders: [
             'url-loader?limit=1000&hash=sha512&digest=hex&name=' + (DEBUG ? '[path][name].[ext]?[hash]' : '[hash].[ext]'),
@@ -138,6 +142,10 @@ module.exports = {
       }
     ]
   },
+  // specify option using `ts` property
+  ts: {
+    compiler: 'typescript'
+  },
   postcss: function(webpack) {
     return [
       require('postcss-import')({addDependencyTo: webpack}),
@@ -154,6 +162,7 @@ module.exports = {
       require('autoprefixer')({
         browsers: AUTOPREFIXER_BROWSERS
       }),
+      require('rucksack-css')(),
       ...(DEBUG ? [] : [require('cssnano')])
     ];
   }
